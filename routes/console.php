@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+declare(strict_types=1);
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+use App\Jobs\FetchArticles;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schedule;
+
+//Schedule::job(new FetchArticles(App::get(NewsAPIArticlesProvider::class)))->everyFiveMinutes();
