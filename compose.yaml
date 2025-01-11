@@ -15,6 +15,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/var/www/html:rw,cached
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
     environment:
       APP_ENV: dev
       XDEBUG_MODE: debug
