@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Xdebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN pecl channel-update pecl.php.net && \
+    pecl install xdebug-3.4.0 && \
+    docker-php-ext-enable xdebug
 
 # Copy existing application directory contents
 COPY . /var/www/html

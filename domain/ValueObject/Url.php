@@ -13,4 +13,9 @@ readonly class Url
             throw new \InvalidArgumentException('Invalid URL');
         }
     }
+
+    public function __toString(): string
+    {
+        return $this->value;
+    }
 }
