@@ -15,9 +15,23 @@ readonly class FullName
         public string $firstName,
         public string $lastName,
     ) {
-        if (empty($this->firstName) || empty($this->lastName)) {
-            throw new DomainException('First name and last name cannot be empty');
+        if (empty($this->firstName)) {
+            throw new DomainException('First name cannot be empty');
         }
+    }
+
+    /**
+     * @throws DomainException
+     */
+    public static function fromString(string $fullName): self
+    {
+        $parts = explode(' ', $fullName);
+
+        if (count($parts) == 2) {
+            return new self($parts[0], $parts[1]);
+        }
+
+        return new self($parts[0], '');
     }
 
     public function __toString(): string

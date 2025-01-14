@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Domain\Entity;
 
-use Domain\ValueObject\Url;
+use Ramsey\Uuid\UuidInterface;
 
 readonly class Source
 {
     public function __construct(
-        public int $id,
+        public UuidInterface $id,
+        public string $code,
         public string $name,
-        public Url $url,
     ) {
     }
 }

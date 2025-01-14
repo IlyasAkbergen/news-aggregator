@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use Domain\Service\ArticlesProvider;
+use Domain\Service\ArticleProvider\ArticlesProvider;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class FetchArticles implements ShouldQueue
+class FetchArticlesJob implements ShouldQueue
 {
     use Queueable;
 

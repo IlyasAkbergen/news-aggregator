@@ -18,7 +18,6 @@ class FullNameTest extends TestCase
 
     public function testInvalidFullName(): void
     {
-        self::expectException(DomainException::class);
         new FullName('Iliyas', '');
         self::expectException(DomainException::class);
         new FullName('', 'Akbergen');

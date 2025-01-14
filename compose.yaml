@@ -17,13 +17,14 @@ services:
       - .:/var/www/html:rw,cached
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
     environment:
-      APP_ENV: dev
-      XDEBUG_MODE: debug
-      XDEBUG_CONFIG: 'remote_host=${XDEBUG_HOST:-127.0.0.1} remote_port=${XDEBUG_PORT:-9003} idekey=${XDEBUG_IDEKEY:-PHPSTORM}'
+      APP_ENV: "${APP_ENV}"
+      XDEBUG_MODE: "${XDEBUG_MODE:-debug}"
+      XDEBUG_CONFIG: 'remote_host=${XDEBUG_HOST:-host.docker.internal} remote_port=${XDEBUG_PORT:-9003} client_host=host.docker.internal idekey=${XDEBUG_IDEKEY:-PHPSTORM}'
     depends_on:
       - database
     expose:
       - "9000"
+      - "9003"
 
   web:
     image: nginx:alpine

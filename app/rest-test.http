@@ -1,0 +1,19 @@
+### GET request with a header
+GET http://localhost:8080/api/test
+Accept: application/json
+
+### GET request with a header
+GET https://newsapi.org/v2/everything?sources=ynet,xinhua-net&from=2024-12-13T12:34:56+01:00&apiKey=6d47bf87a24d4610863b9b781d93ee1b
+Accept: application/json
+
+### GET request with a header
+GET https://newsapi.org/v2/sources?apiKey=6d47bf87a24d4610863b9b781d93ee1b
+Accept: application/json
+
+### GET request with a header
+GET https://newsapi.org/v2/categories?apiKey=6d47bf87a24d4610863b9b781d93ee1b
+Accept: application/json
+
+### GET request with a header
+GET https://newsapi.org/v2/sources/abc-news?apiKey=6d47bf87a24d4610863b9b781d93ee1b
+Accept: application/json
