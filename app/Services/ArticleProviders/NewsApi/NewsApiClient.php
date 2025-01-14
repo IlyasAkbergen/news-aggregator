@@ -22,7 +22,8 @@ readonly class NewsApiClient
     }
 
     /**
-     * @return array[]
+     * @param string[] $sourceCodes
+     * @return array<string, mixed>
      * @throws ExternalException
      */
     public function getArticles(
@@ -31,7 +32,7 @@ readonly class NewsApiClient
     ): array {
         try {
             $response = json_decode(
-                $this->httpClient->get('v2/everything', [
+                $this->httpClient->request('GET', 'v2/everything', [
                     'query' => [
                         'sources' => implode(',', $sourceCodes),
                         'from' => $from->format(DateTime::RFC3339),
@@ -88,14 +89,14 @@ readonly class NewsApiClient
     }
 
     /**
-     * @throws ExternalException
+     * @return array<string, mixed>
      */
     private function getSourcesResponse(): array
     {
         return Cache::remember('news-api-sources', 24 * 3600, function (): array {
             try {
                 $response = json_decode(
-                    $this->httpClient->get('v2/sources')->getBody()->getContents(),
+                    $this->httpClient->request('GET', 'v2/sources')->getBody()->getContents(),
                     true,
                 );
             } catch (\Throwable $e) {

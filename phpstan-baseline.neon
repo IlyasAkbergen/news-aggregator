@@ -1,0 +1,67 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Author\> in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\: TRelatedModel, TDeclaringModel$#'
+			identifier: generics.lessTypes
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Category\> in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\: TRelatedModel, TDeclaringModel$#'
+			identifier: generics.lessTypes
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Source\> in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\: TRelatedModel, TDeclaringModel$#'
+			identifier: generics.lessTypes
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Instanceof between string and Ramsey\\Uuid\\UuidInterface will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Method App\\Models\\Article\:\:author\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Author\> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Author, \$this\(App\\Models\\Article\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Method App\\Models\\Article\:\:category\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Category\> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Category, \$this\(App\\Models\\Article\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Method App\\Models\\Article\:\:source\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Source\> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Source, \$this\(App\\Models\\Article\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Property App\\Models\\Article\:\:\$casts type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Models/Article.php
+
+		-
+			message: '#^Instanceof between string and Ramsey\\Uuid\\UuidInterface will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Models/Author.php
+
+		-
+			message: '#^Instanceof between string and Ramsey\\Uuid\\UuidInterface will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^Instanceof between string and Ramsey\\Uuid\\UuidInterface will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Models/Source.php

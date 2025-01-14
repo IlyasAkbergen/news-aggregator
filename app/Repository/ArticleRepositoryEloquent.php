@@ -29,7 +29,7 @@ class ArticleRepositoryEloquent implements ArticleRepositoryInterface
                 'content' => $article->content,
                 'url' => $article->url,
                 'image_url' => $article->imageUrl,
-                'author_id' => $article->author?->id ?? null,
+                'author_id' => $article->author->id ?? null,
                 'source_id' => $article->source->id,
                 'category_id' => $article->category->id,
                 'published_at' => $article->publishedAt,

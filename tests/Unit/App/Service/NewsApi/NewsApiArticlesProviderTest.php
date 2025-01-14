@@ -63,19 +63,18 @@ class NewsApiArticlesProviderTest extends TestCase
         )->fetchArticles();
 
         Queue::assertPushed(static function (SaveNewsApiArticleJob $job) {
-            /** @phpstan-ignore-next-line */
             return $job->articleResponseDto == new ArticleResponseDto(
                 source: new \App\Services\ArticleProviders\NewsApi\Dto\SourceResponseDto(
                     id: 'source1',
                     name: 'Source 1',
                 ),
-                author: 'Author 1',
                 title: 'Title 1',
                 description: 'Description 1',
                 url: 'https://example.com/1',
-                urlToImage: 'https://example.com/1.jpg',
                 publishedAt: '2021-01-01T00:00:00Z',
                 content: 'Content 1',
+                author: 'Author 1',
+                urlToImage: 'https://example.com/1.jpg',
             );
         });
     }

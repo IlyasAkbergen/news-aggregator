@@ -12,6 +12,9 @@ class SourceResponseDto
     ) {
     }
 
+    /**
+     * @param array<string, string> $source
+     */
     public static function fromPayload(array $source): self
     {
         return new self(

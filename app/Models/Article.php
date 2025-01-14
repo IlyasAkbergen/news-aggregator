@@ -55,16 +55,25 @@ class Article extends Model
         return $this->id instanceof UuidInterface ? $this->id : Uuid::fromString($this->id);
     }
 
+    /**
+     * @return BelongsTo<Source>
+     */
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
     }
 
+    /**
+     * @return BelongsTo<Author>
+     */
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
     }
 
+    /**
+     * @return BelongsTo<Category>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

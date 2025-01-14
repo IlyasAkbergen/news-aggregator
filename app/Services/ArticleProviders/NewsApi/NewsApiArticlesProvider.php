@@ -45,7 +45,7 @@ class NewsApiArticlesProvider implements ArticlesProvider
         );
         $articles = $this->newsApiClient->getArticles(
             sourceCodes: $sourceCodes,
-            from: $latestArticle?->publishedAt ?? $this->getDefaultLatestArticleDate(),
+            from: $latestArticle->publishedAt ?? $this->getDefaultLatestArticleDate(),
         );
 
         foreach ($articles as $article) {

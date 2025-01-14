@@ -15,7 +15,7 @@ up:
 	docker compose up -d
 
 test:
-	docker compose run --no-deps --rm php sh -c "touch database/database.sqlite && composer install && php /var/www/html/vendor/phpunit/phpunit/phpunit /var/www/html/tests"
+	docker compose run --no-deps --rm php sh -c "touch database/database.sqlite && composer install && composer test"
 
 phpstan:
-	docker compose run --no-deps --rm php sh -c "composer install && php /var/www/html/vendor/bin/phpstan"
+	docker compose run --no-deps --rm php sh -c "composer install && composer phpstan"

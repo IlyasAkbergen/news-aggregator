@@ -66,8 +66,8 @@ class NewsApiClientTest extends TestCase
             ->willReturn($bodyMock);
         $httpClientMock = self::createMock(Client::class);
         $httpClientMock->expects(self::once())
-            ->method('get')
-            ->with('v2/everything', [
+            ->method('request')
+            ->with('GET', 'v2/everything', [
                 'query' => [
                     'sources' => 'source1,source2',
                     'from' => '2025-01-01T12:34:56+00:00',
@@ -89,7 +89,7 @@ class NewsApiClientTest extends TestCase
     {
         $httpClientMock = self::createMock(Client::class);
         $httpClientMock->expects(self::once())
-            ->method('get')
+            ->method('request')
             ->willThrowException(new \Exception('Some Error'));
         $loggerMock = self::createMock(LoggerInterface::class);
         $loggerMock->expects(self::once())->method('error');
@@ -142,8 +142,8 @@ class NewsApiClientTest extends TestCase
             ->willReturn($bodyMock);
         $httpClientMock = self::createMock(Client::class);
         $httpClientMock->expects(self::once())
-            ->method('get')
-            ->with('v2/sources')
+            ->method('request')
+            ->with('GET', 'v2/sources')
             ->willReturn($responseMock);
         $client = $this->getClient(
             httpClient: $httpClientMock,
@@ -195,8 +195,8 @@ class NewsApiClientTest extends TestCase
                      ->willReturn($bodyMock);
         $httpClientMock = self::createMock(Client::class);
         $httpClientMock->expects(self::once())
-                       ->method('get')
-                       ->with('v2/sources')
+                       ->method('request')
+                       ->with('GET', 'v2/sources')
                        ->willReturn($responseMock);
         $client = $this->getClient(
             httpClient: $httpClientMock,
