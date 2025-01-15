@@ -65,3 +65,15 @@ parameters:
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: app/Models/Source.php
+
+		-
+			message: '#^Method App\\Services\\LaravelPaginatorAdapter\:\:__construct\(\) has parameter \$paginator with generic interface Illuminate\\Contracts\\Pagination\\LengthAwarePaginator but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Services/LaravelPaginatorAdapter.php
+
+		-
+			message: '#^Method App\\Services\\LaravelPaginatorAdapter\:\:items\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/LaravelPaginatorAdapter.php

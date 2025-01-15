@@ -1,0 +1,25 @@
+### Api Login
+POST http://localhost:8080/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password"
+}
+
+### GET request with a header
+GET http://localhost:8080/api/user
+Accept: application/json
+Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+
+### GET articles
+GET http://localhost:8080/api/articles?page=1&per_page=100&category_id=29cbd6f6-284b-4d9f-8605-4bc1d7cec3e5
+Accept: application/json
+Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+
+### GET articles
+GET http://localhost:8080/api/articles/024ccf87-b522-41c9-8447-e51ec9d219a0
+Accept: application/json
+Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+

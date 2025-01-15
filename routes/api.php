@@ -1,15 +1,18 @@
 <?php
 
-use App\Jobs\FetchArticlesJob;
-use App\Services\ArticleProviders\NewsApi\NewsApiArticlesProvider;
+use App\Http\Controllers\Api\ArticlesController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('test', function () {
-    new FetchArticlesJob(App::get(NewsApiArticlesProvider::class))->handle();
-});
+Route::get('articles', [ArticlesController::class, 'index'])->middleware('auth:sanctum');
+
+Route::apiResource('articles', ArticlesController::class)
+    ->only(['index', 'show'])
+    ->middleware('auth:sanctum');
