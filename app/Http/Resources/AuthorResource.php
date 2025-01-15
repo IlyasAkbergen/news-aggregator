@@ -7,10 +7,18 @@ namespace App\Http\Resources;
 use Domain\Entity\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes as OA;
 
 /**
  * @property Author $resource
  */
+#[OA\Schema(
+    title: 'AuthorResource',
+    properties: [
+        new OA\Property(property: 'id', type: 'string'),
+        new OA\Property(property: 'full_name', type: 'string'),
+    ],
+)]
 class AuthorResource extends JsonResource
 {
     public function __construct(Author $resource)

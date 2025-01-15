@@ -14,5 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Prepare
+      run: make copy-env & make up-php
+
     - name: PHPStan
       run: make phpstan

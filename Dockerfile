@@ -2,7 +2,6 @@ FROM php:8.4-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    git \
     unzip \
     libpq-dev \
     librabbitmq-dev \

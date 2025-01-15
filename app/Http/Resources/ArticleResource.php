@@ -7,10 +7,25 @@ namespace App\Http\Resources;
 use Domain\Entity\Article;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes as OA;
 
 /**
  * @property Article $resource
  */
+#[OA\Schema(
+    title: 'ArticleResource',
+    properties: [
+        new OA\Property(property: 'id', type: 'string'),
+        new OA\Property(property: 'title', type: 'string'),
+        new OA\Property(property: 'description', type: 'string'),
+        new OA\Property(property: 'content', type: 'string'),
+        new OA\Property(property: 'url', type: 'string'),
+        new OA\Property(property: 'imageUrl', type: 'string'),
+        new OA\Property(property: 'author', ref: '#/components/schemas/AuthorResource', type: 'object'),
+        new OA\Property(property: 'source', ref: '#/components/schemas/SourceResource', type: 'object'),
+        new OA\Property(property: 'category', ref: '#/components/schemas/CategoryResource', type: 'object'),
+    ],
+)]
 class ArticleResource extends JsonResource
 {
     public function __construct(Article $resource)

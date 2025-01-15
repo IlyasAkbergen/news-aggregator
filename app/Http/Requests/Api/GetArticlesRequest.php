@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Attributes as OA;
 
 /**
  * @property string|null $page
@@ -14,6 +15,19 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string|null $category_id
  * @property string|null $source_id
  */
+#[OA\Schema(
+    title: 'GetArticlesRequest',
+    required: ['page', 'per_page'],
+    properties: [
+        new OA\Property(property: 'page', type: 'integer'),
+        new OA\Property(property: 'per_page', type: 'integer'),
+        new OA\Property(property: 'search', type: 'string'),
+        new OA\Property(property: 'date_from', type: 'string'),
+        new OA\Property(property: 'category_id', type: 'string'),
+        new OA\Property(property: 'source_id', type: 'string'),
+    ],
+    type: "object",
+)]
 class GetArticlesRequest extends FormRequest
 {
     public function authorize(): bool

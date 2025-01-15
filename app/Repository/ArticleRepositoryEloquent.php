@@ -80,6 +80,7 @@ class ArticleRepositoryEloquent implements ArticleRepositoryInterface
             ->with(['author', 'source', 'category'])
             ->when($param->sourceId, fn ($q, $sourceId) => $q->where('source_id', $sourceId))
             ->when($param->categoryId, fn ($q, $categoryId) => $q->where('category_id', $categoryId))
+            ->when($param->search, fn ($q, $search) => $q->where('title', 'like', "%$search%"))
             ->paginate(
                 perPage: $param->perPage,
                 page: $param->page,

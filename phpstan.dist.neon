@@ -6,5 +6,4 @@ parameters:
         - public/
         - app/
         - tests/
-        - resources/
         - database/

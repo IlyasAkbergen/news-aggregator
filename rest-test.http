@@ -11,15 +11,15 @@ Content-Type: application/json
 ### GET request with a header
 GET http://localhost:8080/api/user
 Accept: application/json
-Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+Authorization: Bearer 1|ndat4YSE7KjDAS5RoG6ec2h9vhQUBl9e1L4GyiEz788822ad
 
 ### GET articles
-GET http://localhost:8080/api/articles?page=1&per_page=100&category_id=29cbd6f6-284b-4d9f-8605-4bc1d7cec3e5
+GET http://localhost:8080/api/articles?page=1&per_page=100&search=Trump
 Accept: application/json
-Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+Authorization: Bearer 3|lfrX4SHF0qNmTs6aHebFgYMp8fKstgPk5JSrM01j620e50eb
 
 ### GET articles
-GET http://localhost:8080/api/articles/024ccf87-b522-41c9-8447-e51ec9d219a0
+GET http://localhost:8080/api/articles/f746888b-9d5b-4261-b359-6f27fef33b05
 Accept: application/json
-Authorization: Bearer 2|KmIyFj2UgpiPypdv1k1T9U7mflxnKFAvVXdXbNJj8d84822b
+Authorization: Bearer 1|ndat4YSE7KjDAS5RoG6ec2h9vhQUBl9e1L4GyiEz788822ad
 

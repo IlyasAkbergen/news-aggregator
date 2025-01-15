@@ -6,11 +6,21 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use OpenApi\Attributes as OA;
 
 /**
  * @property string $email
  * @property string $password
  */
+#[OA\Schema(
+    title: "LoginRequest",
+    required: ["email", "password"],
+    properties: [
+        new OA\Property(property: "email", type: "string"),
+        new OA\Property(property: "password", type: "string"),
+    ],
+    type: "object",
+)]
 class LoginRequest extends FormRequest
 {
     public function authorize(): bool
