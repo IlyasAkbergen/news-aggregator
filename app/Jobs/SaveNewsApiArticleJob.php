@@ -47,10 +47,14 @@ class SaveNewsApiArticleJob implements ShouldQueue
         SourceFinder $sourceFinder,
         CategoryFinder $categoryFinder,
     ): void {
-        $articleRepository1 = $articleRepository;
         $this->authorRepository = $authorRepository;
         $this->sourceFinder = $sourceFinder;
         $this->categoryFinder = $categoryFinder;
+
+        $article = $articleRepository->findByUrl(new Url($this->articleResponseDto->url));
+        if ($article !== null) {
+            return;
+        }
 
         $source = $this->getSource();
         $article = new Article(
@@ -72,7 +76,7 @@ class SaveNewsApiArticleJob implements ShouldQueue
             providerCode: ArticleProviderCode::NEWS_API,
         );
 
-        $articleRepository1->save($article);
+        $articleRepository->save($article);
     }
 
     /**

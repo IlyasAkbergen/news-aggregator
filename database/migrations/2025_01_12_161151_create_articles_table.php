@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('content');
-            $table->string('url');
+            $table->string('url')->unique();
             $table->string('image_url', 500)->nullable();
             $table->foreignUuid('author_id')->nullable()->constrained('authors');
             $table->foreignUuid('source_id')->constrained('sources');

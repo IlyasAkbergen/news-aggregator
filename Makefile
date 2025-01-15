@@ -1,6 +1,9 @@
 default: setup
 
-setup: up install migration test seed
+setup: copy-env up install migration seed test
+
+copy-env:
+	cp .env.example .env
 
 install:
 	docker compose run --rm php sh -c "composer install"
@@ -19,3 +22,6 @@ test:
 
 phpstan:
 	docker compose run --no-deps --rm php sh -c "composer install && composer phpstan"
+
+fetch_articles:
+	docker compose run --no-deps --rm php sh -c "php artisan articles:fetch"

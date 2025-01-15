@@ -13,6 +13,7 @@ use Domain\Enum\ArticleProviderCode;
 use Domain\Exception\DomainException;
 use Domain\Repository\ArticleRepositoryInterface;
 use Domain\Service\PaginatorInterface;
+use Domain\ValueObject\Url;
 use Ramsey\Uuid\UuidInterface;
 
 class ArticleRepositoryEloquent implements ArticleRepositoryInterface
@@ -88,5 +89,21 @@ class ArticleRepositoryEloquent implements ArticleRepositoryInterface
             paginator: $paginator,
             itemsTransformer: fn (ArticleModel $record) => ArticleFactory::fromEloquentModel($record),
         );
+    }
+
+    /**
+     * @throws DomainException
+     */
+    public function findByUrl(Url $url): ?Article
+    {
+        $record = ArticleModel::query()
+            ->where('url', $url->value)
+            ->first();
+
+        if ($record === null) {
+            return null;
+        }
+
+        return ArticleFactory::fromEloquentModel($record);
     }
 }

@@ -8,6 +8,7 @@ use Domain\DTO\GetArticlesParameters;
 use Domain\Entity\Article;
 use Domain\Enum\ArticleProviderCode;
 use Domain\Service\PaginatorInterface;
+use Domain\ValueObject\Url;
 use Ramsey\Uuid\UuidInterface;
 
 interface ArticleRepositoryInterface
@@ -22,4 +23,6 @@ interface ArticleRepositoryInterface
      * @return PaginatorInterface<Article>
      */
     public function getArticles(GetArticlesParameters $param): PaginatorInterface;
+
+    public function findByUrl(Url $url): ?Article;
 }

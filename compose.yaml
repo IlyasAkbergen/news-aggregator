@@ -26,6 +26,18 @@ services:
       - "9000"
       - "9003"
 
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan queue:work --tries=3
+    volumes:
+      - .:/var/www/html:rw,cached
+    environment:
+      APP_ENV: "${APP_ENV}"
+    depends_on:
+      - database
+
   web:
     image: nginx:alpine
     ports:
