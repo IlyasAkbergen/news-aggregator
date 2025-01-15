@@ -6,17 +6,32 @@ namespace App\Repository;
 
 use App\Factories\ArticleFactory;
 use App\Models\Article as ArticleModel;
+use App\Services\LaravelPaginatorAdapter;
+use Domain\DTO\GetArticlesParameters;
 use Domain\Entity\Article;
 use Domain\Enum\ArticleProviderCode;
 use Domain\Exception\DomainException;
 use Domain\Repository\ArticleRepositoryInterface;
+use Domain\Service\PaginatorInterface;
+use Ramsey\Uuid\UuidInterface;
 
 class ArticleRepositoryEloquent implements ArticleRepositoryInterface
 {
-    public function find(int $id): ?Article
+    /**
+     * @throws DomainException
+     */
+    public function find(UuidInterface $id): ?Article
     {
-        // TODO: Implement find() method.
-        return null;
+        $record = ArticleModel::query()
+            ->with(['author', 'source', 'category'])
+            ->where('id', $id->toString())
+            ->first();
+
+        if ($record === null) {
+            return null;
+        }
+
+        return ArticleFactory::fromEloquentModel($record);
     }
 
     public function save(Article ...$articles): void
@@ -56,5 +71,22 @@ class ArticleRepositoryEloquent implements ArticleRepositoryInterface
         }
 
         return ArticleFactory::fromEloquentModel($record);
+    }
+
+    public function getArticles(GetArticlesParameters $param): PaginatorInterface
+    {
+        $paginator = ArticleModel::query()
+            ->with(['author', 'source', 'category'])
+            ->when($param->sourceId, fn ($q, $sourceId) => $q->where('source_id', $sourceId))
+            ->when($param->categoryId, fn ($q, $categoryId) => $q->where('category_id', $categoryId))
+            ->paginate(
+                perPage: $param->perPage,
+                page: $param->page,
+            );
+
+        return new LaravelPaginatorAdapter(
+            paginator: $paginator,
+            itemsTransformer: fn (ArticleModel $record) => ArticleFactory::fromEloquentModel($record),
+        );
     }
 }

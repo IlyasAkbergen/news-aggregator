@@ -4,14 +4,22 @@ declare(strict_types=1);
 
 namespace Domain\Repository;
 
+use Domain\DTO\GetArticlesParameters;
 use Domain\Entity\Article;
 use Domain\Enum\ArticleProviderCode;
+use Domain\Service\PaginatorInterface;
+use Ramsey\Uuid\UuidInterface;
 
 interface ArticleRepositoryInterface
 {
-    public function find(int $id): ?Article;
+    public function find(UuidInterface $id): ?Article;
 
     public function save(Article ...$articles): void;
 
     public function getLatestArticleByProvider(ArticleProviderCode $providerCode): ?Article;
+
+    /**
+     * @return PaginatorInterface<Article>
+     */
+    public function getArticles(GetArticlesParameters $param): PaginatorInterface;
 }
