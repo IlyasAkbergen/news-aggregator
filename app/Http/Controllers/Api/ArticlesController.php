@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\GetArticlesRequest;
 use App\Http\Resources\ArticleResource;
-use App\Models\Article;
 use App\UseCase\GetArticles\GetArticlesUseCase;
 use App\UseCase\GetArticles\RequestModel;
 use DateMalformedStringException;
@@ -15,15 +13,62 @@ use DateTimeImmutable;
 use Domain\Exception\ExternalException;
 use Domain\Repository\ArticleRepositoryInterface;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Ramsey\Uuid\Uuid;
+use OpenApi\Attributes as OA;
 
-class ArticlesController extends Controller
+class ArticlesController extends BaseApiController
 {
     /**
      * @throws DateMalformedStringException
      * @throws ExternalException
      */
+    #[OA\PathItem(
+        path: '/api/articles',
+        get: new OA\Get(
+            security: [['sanctum' => []]],
+            tags: [ 'Articles'],
+            parameters: [
+                new OA\Parameter(name: 'page', in: 'query', required: true),
+                new OA\Parameter(name: 'per_page', in: 'query', required: true),
+                new OA\Parameter(name: 'search', in: 'query'),
+                new OA\Parameter(name: 'date_from', in: 'query'),
+                new OA\Parameter(name: 'category_id', in: 'query'),
+                new OA\Parameter(name: 'source_id', in: 'query'),
+            ],
+            responses: [
+                new OA\Response(
+                    response: 200,
+                    description: 'Successful operation',
+                    content: new OA\MediaType(
+                        mediaType: 'application/json',
+                        schema: new OA\Schema(
+                            properties: [
+                                new OA\Property(
+                                    property: 'data',
+                                    properties: [
+                                        new OA\Property(
+                                            property: 'meta',
+                                            properties: [],
+                                            type: 'object',
+                                        ),
+                                        new OA\Property(
+                                            property: 'records',
+                                            type: 'array',
+                                            items: new OA\Items(
+                                                ref: '#/components/schemas/ArticleResource',
+                                            ),
+                                        ),
+                                    ],
+                                    type: 'object',
+                                ),
+                            ],
+                            type: 'object',
+                        ),
+                    ),
+                ),
+            ],
+        ),
+    )]
     public function index(GetArticlesRequest $request, GetArticlesUseCase $useCase): JsonResource
     {
         $responseModel = $useCase(new RequestModel(
@@ -50,6 +95,26 @@ class ArticlesController extends Controller
         ]);
     }
 
+    #[OA\PathItem(
+        path: '/api/articles/{id}',
+        get: new OA\Get(
+            security: [['sanctum' => []]],
+            tags: [ 'Articles'],
+            parameters: [
+                new OA\Parameter(name: 'id', in: 'path', required: true),
+            ],
+            responses: [
+                new OA\Response(
+                    response: 200,
+                    description: 'Successful operation',
+                    content: new OA\MediaType(
+                        mediaType: 'application/json',
+                        schema: new OA\Schema(ref: '#/components/schemas/ArticleResource'),
+                    ),
+                ),
+            ],
+        ),
+    )]
     public function show(string $id, ArticleRepositoryInterface $articleRepository): JsonResource
     {
         $article = $articleRepository->find(Uuid::fromString($id));

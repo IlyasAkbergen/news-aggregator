@@ -25,13 +25,13 @@ class ArticleResponseDto
     {
         return new self(
             source: SourceResponseDto::fromPayload($payload[ 'source']),
-            title: $payload[ 'title'],
-            description: $payload[ 'description'],
-            url: $payload[ 'url'],
-            publishedAt: $payload[ 'publishedAt'],
-            content: $payload[ 'content'],
-            author: $payload[ 'author'],
-            urlToImage: $payload[ 'urlToImage'],
+            title: (string) $payload['title'],
+            description: (string) $payload['description'],
+            url: $payload['url'],
+            publishedAt: $payload['publishedAt'],
+            content: (string) $payload['content'],
+            author: $payload['author'],
+            urlToImage: $payload['urlToImage'],
         );
     }
 }

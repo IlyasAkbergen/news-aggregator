@@ -1,27 +1,33 @@
 default: setup
 
-setup: copy-env up install migration seed test
+setup: copy-env up install migration seed test up-workers
 
 copy-env:
 	cp .env.example .env
 
 install:
-	docker compose run --rm php sh -c "composer install"
+	docker compose exec php sh -c "composer install"
 
 migration:
-	docker compose run --rm php sh -c "php artisan migrate"
+	docker compose exec php sh -c "php artisan migrate"
 
 seed:
-	docker compose run --rm php sh -c "php artisan db:seed"
+	docker compose exec php sh -c "php artisan db:seed"
 
 up:
 	docker compose up -d
 
+up-php:
+	docker compose up --no-deps -d php
+
+up-workers:
+	docker compose up -d queue-worker cron
+
 test:
-	docker compose run --no-deps --rm php sh -c "touch database/database.sqlite && composer install && composer test"
+	docker compose exec php sh -c "touch database/database.sqlite && composer install && composer test"
 
 phpstan:
-	docker compose run --no-deps --rm php sh -c "composer install && composer phpstan"
+	docker compose exec php sh -c "composer install && composer phpstan"
 
 fetch_articles:
-	docker compose run --no-deps --rm php sh -c "php artisan articles:fetch"
+	docker compose exec php sh -c "php artisan articles:fetch"
