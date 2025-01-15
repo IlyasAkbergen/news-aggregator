@@ -22,6 +22,9 @@ password
 - click on `Authorize` button on top right corner
 - paste the token in the input box with `Bearer ` prefix
 
+### Tests and Static Analysis
+#### There are github actions setup for this, which runs on every push and pull request to the master branch
+
 #### Run tests
 ```sh
 make test
