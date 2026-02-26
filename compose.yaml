@@ -12,7 +12,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
     volumes:
       - .:/var/www/html:rw,cached
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
