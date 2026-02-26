@@ -16,6 +16,7 @@ use Domain\Repository\AuthorRepositoryInterface;
 use Domain\Repository\CategoryRepositoryInterface;
 use Domain\Repository\SourceRepositoryInterface;
 use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
