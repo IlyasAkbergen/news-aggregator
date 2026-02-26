@@ -17,3 +17,5 @@ php artisan route:cache
 php artisan view:cache
 
 php artisan l5-swagger:generate
+
+php artisan storage:link
