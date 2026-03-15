@@ -10,12 +10,12 @@ php artisan migrate --force
 # Clear cache
 php artisan optimize:clear
 
+php artisan storage:link --force || true
+
+php artisan l5-swagger:generate
+
 # Cache the various components of the Laravel application
 php artisan config:cache
 php artisan event:cache
 php artisan route:cache
 php artisan view:cache
-
-php artisan storage:link
-
-php artisan l5-swagger:generate
